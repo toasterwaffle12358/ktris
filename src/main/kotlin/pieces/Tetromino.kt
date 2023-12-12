@@ -1,4 +1,5 @@
-class Tetromino(val pieceType: String) {
-    class linePiece {
-    }
+class Tetromino {
+    val color: String = ""
+    val shape = listOf(listOf(true,true),listOf(true,true))
+
 }

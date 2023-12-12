@@ -1,29 +1,49 @@
 //imports
 import pieces.*
+import java.lang.reflect.Constructor
+import kotlin.random.Random
 
 fun main(args: Array<String>) {
 
     //initializing basic values
-    val colorreset = "\u001B[38;5;15m"
+    val colorReset = "\u001B[38;5;15m"
+    val playSpace = PlaySpace().playSpaceList
 
-    //printing piece
-    for (piecePixelRow in Lpiece().shape) {
-        for (piecePixel in piecePixelRow) {
-            if (piecePixel){
-                print("${Lpiece().color}▩$colorreset")
+    //function for getting next random piece
+
+
+    //function for adding piece into board
+    fun addPiece() {
+        for ((rowIndex, piecePixelRow) in SquarePiece().shape.withIndex()) {
+            for ((index, piecePixel) in piecePixelRow.withIndex()) {
+                if (piecePixel){
+                    playSpace[rowIndex][3+index] = "${SquarePiece().color} ▩ $colorReset"
+                }
             }
-            print(" ")
         }
-        println("")
     }
 
-    //printing board
-    for (boardrow in PlaySpace().playSpaceList) {
-        print("╣")
-        for (spot in boardrow) {
-            print(spot)
+    // function for printing board
+    fun printBoard() {
+        for (boardRow in playSpace) {
+            print("╣")
+            for (spot in boardRow) {
+                print(spot)
+            }
+            print("╠")
+            println()
         }
-        print("╠")
-        println()
     }
+
+    //function for making piece fall
+
+
+    //game
+    addPiece()
+    while(true) {
+        printBoard()
+        println("")
+        Thread.sleep(1_000)
+    }
+
 }
