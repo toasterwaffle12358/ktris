@@ -1,6 +1,5 @@
 //imports
 import pieces.*
-import java.lang.reflect.Constructor
 import kotlin.random.Random
 
 fun main(args: Array<String>) {
@@ -8,16 +7,19 @@ fun main(args: Array<String>) {
     //initializing basic values
     val colorReset = "\u001B[38;5;15m"
     val playSpace = PlaySpace().playSpaceList
+    val piecesList = listOf(LinePiece(),SquarePiece(),LPiece(),ReverseLPiece(),ReverseSPiece(),SPiece(),TPiece())
 
     //function for getting next random piece
-
+    fun getNextPiece(): Tetromino {
+        return piecesList[Random.nextInt(0, 7)]
+    }
 
     //function for adding piece into board
-    fun addPiece() {
-        for ((rowIndex, piecePixelRow) in SquarePiece().shape.withIndex()) {
+    fun addPiece(currentPiece: Tetromino) {
+        for ((rowIndex, piecePixelRow) in currentPiece.shape.withIndex()) {
             for ((index, piecePixel) in piecePixelRow.withIndex()) {
                 if (piecePixel){
-                    playSpace[rowIndex][3+index] = "${SquarePiece().color} ▩ $colorReset"
+                    playSpace[rowIndex][3+index] = "${currentPiece.color} ▩ $colorReset"
                 }
             }
         }
@@ -39,8 +41,9 @@ fun main(args: Array<String>) {
 
 
     //game
-    addPiece()
+
     while(true) {
+        addPiece(getNextPiece())
         printBoard()
         println("")
         Thread.sleep(1_000)
