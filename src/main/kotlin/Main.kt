@@ -6,7 +6,7 @@ fun main(args: Array<String>) {
 
     //initializing basic values
     val colorReset = "\u001B[38;5;15m"
-    val playSpace = PlaySpace().playSpaceList
+    var playSpace = PlaySpace().playSpaceList
     val piecesList = listOf(LinePiece(),SquarePiece(),LPiece(),ReverseLPiece(),ReverseSPiece(),SPiece(),TPiece())
 
     //function for getting next random piece
@@ -38,15 +38,32 @@ fun main(args: Array<String>) {
     }
 
     //function for making piece fall
+    fun moveBoardDown() {
+        val playSpaceOld = playSpace
+        playSpace[0] = PlaySpace().playSpaceList[0]
+        for (i in 1..19) {
+            playSpace[i] = playSpaceOld[i-1]
+        }
+    }
 
+
+    //function for rotating pieces
+
+    //function to clear board
+    fun clearBoard(): MutableList<MutableList<String>> {
+        playSpace = PlaySpace().playSpaceList
+        return playSpace
+    }
 
     //game
-
     while(true) {
+        playSpace = clearBoard()
         addPiece(getNextPiece())
         printBoard()
         println("")
-        Thread.sleep(1_000)
+        //moveBoardDown()
+        Thread.sleep(1)
+        readln()
     }
 
 }
