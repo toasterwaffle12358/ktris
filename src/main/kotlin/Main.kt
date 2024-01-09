@@ -1,8 +1,19 @@
 //imports
 import pieces.*
 import kotlin.random.Random
+import javax.swing.*;
+import java.awt.event.KeyListener;
+import java.awt.BorderLayout
+import java.awt.Dimension
 
 fun main(args: Array<String>) {
+
+    //>------------------------< JFrame input capturing >------------------------<\\
+    val frame = JFrame("no way omg")
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)
+    frame.setSize(600, 400)
+    frame.setVisible(true)
+
 
     //initializing basic values
     val colorReset = "\u001B[38;5;15m"
